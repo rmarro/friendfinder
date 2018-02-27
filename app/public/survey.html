@@ -111,9 +111,8 @@
                 scores: scoresArray,
             };
 
-            $.post("/api/friends", newUser).then(function(data) {
-                console.log("adding user" + data);
-            });
+            $.post("/api/friends", newUser);
+            
         });
     </script>
 
