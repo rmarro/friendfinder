@@ -21,6 +21,7 @@ module.exports = function(app) {
 };
 
 
+// extended = true fixes sending arrays to server?????
 
 
 
