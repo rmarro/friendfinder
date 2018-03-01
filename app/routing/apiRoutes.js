@@ -10,25 +10,33 @@ module.exports = function(app) {
         res.json(friendList);
     })
 
+    // Compare newUser info to all friends, return best match
     app.post("/api/friends", function(req, res) {
         var newUser = req.body;
-        console.log(newUser);
         userScores = newUser.scores;
-        // loop through all objects in friendList
-        // access the scores key of the object
-        friendScores = friendList[0].scores;
-        // compare each score in that array to the newUser scores array and
-        //add up total of absolute value of differences
-        var differenceArray = [];
-        for (var i = 0; i < friendScores.length; i++) {
-            differenceArray.push(Math.abs(friendScores[i] - userScores[i]))
+        var lowestDifference = 1000;
+        var matchIndex = "none"
+        
+        // Loop through all possible friends and determine total difference between scores
+        for (var i = 0; i < friendList.length; i++) {
+            friendScores = friendList[i].scores;
+            var differenceArray = [];
+            for (var j = 0; j < friendScores.length; j++) {
+                differenceArray.push(Math.abs(friendScores[j] - userScores[j]))
+            };
+            var differenceTotal = differenceArray.reduce(function (a, b) {
+                return a + b;
+            }, 0);
+            // If it's lower than current best match, replace it
+            if (differenceTotal < lowestDifference) {
+                lowestDifference = differenceTotal;
+                matchIndex = i
+            };
         };
-        var differenceTotal = differenceArray.reduce(function (a, b) {
-            return a + b;
-        }, 0);
-        console.log("Difference Score: " + differenceTotal);
 
-        friendList.push(newUser);
+        console.log(friendList[matchIndex]);
+
+        // friendList.push(newUser);
         res.send("New user added");
     });
 
