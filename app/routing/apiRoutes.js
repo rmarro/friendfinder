@@ -34,10 +34,10 @@ module.exports = function(app) {
             };
         };
 
-        console.log(friendList[matchIndex]);
-
+        // console.log(friendList[matchIndex]);
         // friendList.push(newUser);
-        res.send("New user added");
+
+        res.send(friendList[matchIndex]);
     });
 
 

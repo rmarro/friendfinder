@@ -96,6 +96,7 @@
         <div>
             <button class="btn btn-primary btn-md" id="add-user">Submit</button>
         </div>
+        <div class="result"></div>
     </div>
     
     <script>
@@ -110,9 +111,14 @@
                 photo: $("#photo").val(),
                 scores: scoresArray,
             };
+            // Send user data as post request, display returned match
+            $.post("/api/friends", newUser).done(function(data) {
+                console.log(data);
+                // ADD MODAL ABOVE and use data (best match) to fill it in
+                // name = data.name
+                // image link = data.photo
+            });
 
-            $.post("/api/friends", newUser);
-            
         });
     </script>
 
