@@ -8,6 +8,11 @@ var friendList = [
             1,
             1,
             1,
+            1,
+            1,
+            1,
+            1,
+            1,
         ]
     },
     {
@@ -19,12 +24,22 @@ var friendList = [
             2,
             2,
             2,
+            2,
+            2,
+            2,
+            2,
+            2,
         ]
     },
     {
         "name": "test3",
         "photo": "http://lorempixel.com/400/200/",
         "scores":[
+            3,
+            3,
+            3,
+            3,
+            3,
             3,
             3,
             3,
