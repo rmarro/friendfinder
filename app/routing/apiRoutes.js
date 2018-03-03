@@ -10,8 +10,9 @@ module.exports = function(app) {
         res.json(friendList);
     })
 
-    // Compare newUser info to all friends, return best match
+    // Handle post request when user submits a new form 
     app.post("/api/friends", function(req, res) {
+        // Save user info, set match variables for comparison
         var newUser = req.body;
         userScores = newUser.scores;
         var lowestDifference = 1000;
@@ -34,13 +35,12 @@ module.exports = function(app) {
             };
         };
 
-        // console.log(friendList[matchIndex]);
+        // Add the new user to friends list
         // friendList.push(newUser);
 
+        // Send the best match back
         res.send(friendList[matchIndex]);
     });
-
-
 };
 
 
