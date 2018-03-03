@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Friend Finder</title>
-
+    
+    <script src="https://code.jquery.com/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery.js"></script>
 
 </head>
 <body>
@@ -98,8 +98,33 @@
         </div>
         <div class="result"></div>
     </div>
+
+    <div class="modal" id="matchModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Here's your new best friend!</h5>                    
+                </div>
+                <div class="modal-body">
+                    <h3 id="matchName"></h3>
+                    <img id="matchPhoto" src="" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
     <script>
+
         $("#add-user").on("click", function (event) {
             // store all user input as newUser
             var scoresArray = [];
@@ -114,9 +139,9 @@
             // Send user data as post request, display returned match
             $.post("/api/friends", newUser).done(function(data) {
                 console.log(data);
-                // ADD MODAL ABOVE and use data (best match) to fill it in
-                // name = data.name
-                // image link = data.photo
+                $("#matchName").text(data.name);
+                $("#matchPhoto").attr("src", data.photo);
+                $("#matchModal").modal('toggle');
             });
 
         });

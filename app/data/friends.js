@@ -1,7 +1,7 @@
 var friendList = [
     {
         "name": "test1",
-        "photo": "www",
+        "photo": "http://lorempixel.com/400/200/",
         "scores":[
             1,
             1,
@@ -12,7 +12,7 @@ var friendList = [
     },
     {
         "name": "test2",
-        "photo": "www",
+        "photo": "http://lorempixel.com/400/200/",
         "scores":[
             2,
             2,
@@ -23,7 +23,7 @@ var friendList = [
     },
     {
         "name": "test3",
-        "photo": "www",
+        "photo": "http://lorempixel.com/400/200/",
         "scores":[
             3,
             3,

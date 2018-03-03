@@ -36,7 +36,7 @@ module.exports = function(app) {
         };
 
         // Add the new user to friends list
-        // friendList.push(newUser);
+        friendList.push(newUser);
 
         // Send the best match back
         res.send(friendList[matchIndex]);
