@@ -21,11 +21,11 @@
 
         <div class="form-group">
             <label for="name"><h3>Name</h3></label>
-            <input type="text" class="form-control" id="name" required="true">
+            <input type="text" class="form-control validate" id="name" required="true">
         </div>
         <div class="form-group">
             <label for="role"><h3>Link to picture</h3></label>
-            <input type="text" class="form-control" id="photo">
+            <input type="text" class="form-control validate" id="photo">
         </div>
 
         <h3>
@@ -189,27 +189,47 @@
     <script>
 
         $("#add-user").on("click", function (event) {
-            // store all user input as newUser
-            var scoresArray = [];
-            $(".custom-select option:selected").each(function() {
-                scoresArray.push($(this).val())
-            });
-            var newUser = {
-                name: $("#name").val(),
-                photo: $("#photo").val(),
-                scores: scoresArray,
+            // Function to check if every field has been filled out
+            function checkComplete() {
+                var complete = true;
+                $(".validate").each(function() {
+                    if ($(this).val() === ""){
+                        complete = false;
+                    }
+                });
+                $(".custom-select").each(function() {
+                    if ($(this).val() === "Select response"){
+                        complete = false;
+                    }
+                });
+                return complete
             };
 
-            // Send user data as post request; display returned match
-            $.post("/api/friends", newUser).done(function(data) {
-                $("#matchName").text(data.name);
-                $("#matchPhoto").attr("src", data.photo);
-                $("#matchModal").modal('toggle');
+            if (checkComplete()) {
+                // store all user input as newUser
+                var scoresArray = [];
+                $(".custom-select option:selected").each(function() {
+                    scoresArray.push($(this).val())
+                });
+                var newUser = {
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    scores: scoresArray,
+                };
 
-                $("#name").val("");
-                $("#photo").val("");
-                $(".custom-select").val("Select response");
-            });
+                // Send user data as post request; display returned match
+                $.post("/api/friends", newUser).done(function(data) {
+                    $("#matchName").text(data.name);
+                    $("#matchPhoto").attr("src", data.photo);
+                    $("#matchModal").modal('toggle');
+
+                    $("#name").val("");
+                    $("#photo").val("");
+                    $(".custom-select").val("Select response");
+                });
+            } else {
+                alert("Please answer every question!")
+            }
 
         });
     </script>
