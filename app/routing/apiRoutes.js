@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     // Handle post request when user submits a new form 
     app.post("/api/friends", function(req, res) {
-        // Save user info, set match variables for comparison
+        // Save user info; set match variables for comparison
         var newUser = req.body;
         userScores = newUser.scores;
         var lowestDifference = 1000;
@@ -42,18 +42,3 @@ module.exports = function(app) {
         res.send(friendList[matchIndex]);
     });
 };
-
-
-//--------------------------------------
-// trying to save all data to friends.js instead of array here-- does that matter??
-
-// function addfriend() {
-//     var newf = "hello";
-//     friendList.push(newf);
-//     fs.writeFile(path.join(__dirname, "../data/friends.js"), JSON.stringify(friendList), "utf-8", function(err) {
-//         if (err) throw err;
-//         console.log("added!")
-//     })
-// };
-
-// addfriend();
